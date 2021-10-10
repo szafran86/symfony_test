@@ -5,9 +5,9 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -17,6 +17,25 @@
         {% endblock %}
     </head>
     <body>
+
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Symfony Test</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="{{ path('frontend') }}">Home</a>
+                {% if app.user %}
+                    <a class="p-2 text-dark" href="{{ path('customer_index') }}">Customers list</a>
+                    <a class="p-2 text-dark" href="{{ path('customer_new') }}">New Customer</a>
+                {% endif %}
+            </nav>
+            {% if app.user %}
+                <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Logout <b>{{ app.user.email }}</b></a>
+            {% else %}    
+                <a class="btn btn-outline-primary" href="{{ path('app_login') }}">Login</a>
+            {% endif %}
+        </div>
+
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

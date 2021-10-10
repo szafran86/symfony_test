@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}Customer index{% endblock %}
 
 {% block body %}
-
 
     <div class="card-deck mb-3">
         <div class="card mb-4 box-shadow">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Homepage</h4>
+                <h4 class="my-0 font-weight-normal">Customers list</h4>
             </div>
             <div class="card-body">
 
@@ -21,7 +20,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Customer_type</th>
-
+                            <th class="text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +32,10 @@
                                 <td>{{ customer.email }}</td>
                                 <td>{{ customer.phone }}</td>
                                 <td>{{ customer.customerType }}</td>
-
+                                <td class="text-right">
+                                    <a class="btn btn-light" href="{{ path('customer_show', {'id': customer.id}) }}">show</a>
+                                    <a class="btn btn-light" href="{{ path('customer_edit', {'id': customer.id}) }}">edit</a>
+                                </td>
                             </tr>
                         {% else %}
                             <tr>
@@ -48,5 +50,9 @@
         </div>
     </div>
 
+
+    <p class="text-right">            
+        <a class="btn btn-primary" href="{{ path('customer_new') }}">Create new</a>
+    </p>
 
 {% endblock %}
